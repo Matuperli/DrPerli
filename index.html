@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dr. Perli — Médico Clínico y Residente de Reumatología. Atención especializada en enfermedades autoinmunes, artritis y patologías del tejido conectivo.">
+  <title>Dr. Perli · Médico Clínico &amp; Reumatología</title>
+  <style>
+    /* ── Reset & Base ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-900: #0d2b45;
+      --blue-800: #1a4a72;
+      --blue-600: #2563a8;
+      --blue-400: #4d9ed8;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-300: #cbd5e1;
+      --slate-100: #f1f5f9;
+      --white: #ffffff;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(13,43,69,.10);
+      --shadow-sm: 0 1px 6px rgba(13,43,69,.08);
+      --transition: .25s ease;
+      --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-serif: Georgia, 'Times New Roman', serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--slate-900);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      font-weight: 700;
+      color: var(--blue-900);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 3rem;
+      height: 3px;
+      background: var(--blue-600);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Navigation ─────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-300);
+      transition: box-shadow var(--transition);
+    }
+
+    #nav.scrolled { box-shadow: var(--shadow-sm); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue-900);
+      white-space: nowrap;
+    }
+
+    .nav-brand span { color: var(--blue-600); }
+
+    .nav-links {
+      display: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--slate-700);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--blue-600); }
+
+    /* hamburger */
+    .nav-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: .5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--blue-900);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile drawer */
+    .nav-drawer {
+      display: none;
+      flex-direction: column;
+      padding: 1rem 1.25rem 1.5rem;
+      border-top: 1px solid var(--slate-100);
+      background: var(--white);
+      gap: .25rem;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+      padding: .75rem 0;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--slate-700);
+      border-bottom: 1px solid var(--slate-100);
+      transition: color var(--transition);
+    }
+
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer a:hover { color: var(--blue-600); }
+
+    /* ── Hero ────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      background: linear-gradient(160deg, var(--blue-900) 0%, #14426a 50%, #1a5276 100%);
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234d9ed8' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2.5rem;
+      padding: 4rem 0;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(77,158,216,.15);
+      border: 1px solid rgba(77,158,216,.3);
+      border-radius: 100px;
+      padding: .35rem .9rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--blue-400);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: .75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 400;
+      color: var(--blue-400);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .hero-bio {
+      font-size: clamp(.9rem, 2.5vw, 1.05rem);
+      color: rgba(255,255,255,.8);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary {
+      background: var(--blue-600);
+      color: var(--white);
+      border-color: var(--blue-600);
+    }
+
+    .btn-primary:hover { background: var(--blue-800); border-color: var(--blue-800); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,.4);
+    }
+
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+    .hero-avatar {
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar-ring {
+      position: relative;
+      width: clamp(220px, 45vw, 320px);
+      height: clamp(220px, 45vw, 320px);
+    }
+
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(77,158,216,.4);
+    }
+
+    .avatar-ring::after {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1px solid rgba(77,158,216,.2);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,.15);
+      /* placeholder gradient */
+      background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+    }
+
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.15);
+      background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: rgba(255,255,255,.6);
+    }
+
+    .avatar-placeholder svg { width: 64px; height: 64px; opacity: .6; }
+    .avatar-placeholder span { font-size: .8rem; font-style: italic; }
+
+    /* ── Formación ───────────────────────────────────── */
+    #formacion { padding: 5rem 0; background: var(--white); }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.75rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: .4rem; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue-600), var(--blue-100));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1.75rem;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      background: var(--blue-600);
+      border-radius: 50%;
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 3px var(--blue-100);
+    }
+
+    .timeline-year {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--blue-600);
+      background: var(--blue-50);
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      margin-bottom: .4rem;
+    }
+
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: .2rem;
+    }
+
+    .timeline-inst {
+      font-size: .875rem;
+      color: var(--slate-500);
+      margin-bottom: .4rem;
+    }
+
+    .timeline-desc {
+      font-size: .875rem;
+      color: var(--slate-700);
+      line-height: 1.6;
+    }
+
+    /* ── Áreas de interés ────────────────────────────── */
+    #areas { padding: 5rem 0; background: var(--slate-100); }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .area-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--slate-300);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .area-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .area-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--blue-50);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .area-icon svg { width: 22px; height: 22px; color: var(--blue-600); }
+
+    .area-name {
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--blue-900);
+      margin-bottom: .3rem;
+    }
+
+    .area-desc {
+      font-size: .85rem;
+      color: var(--slate-500);
+      line-height: 1.55;
+    }
+
+    /* ── Publicaciones ───────────────────────────────── */
+    #publicaciones { padding: 5rem 0; background: var(--white); }
+
+    .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .pub-item {
+      border-left: 3px solid var(--blue-600);
+      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+      background: var(--slate-100);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: background var(--transition);
+    }
+
+    .pub-item:hover { background: var(--blue-50); }
+
+    .pub-type {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      margin-bottom: .35rem;
+    }
+
+    .pub-title {
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--slate-900);
+      margin-bottom: .35rem;
+      line-height: 1.4;
+    }
+
+    .pub-authors {
+      font-size: .82rem;
+      color: var(--slate-500);
+      margin-bottom: .25rem;
+    }
+
+    .pub-journal {
+      font-size: .82rem;
+      color: var(--slate-700);
+      font-style: italic;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      margin-top: .5rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--blue-600);
+      transition: gap var(--transition);
+    }
+
+    .pub-link:hover { gap: .5rem; }
+
+    /* ── Contacto ────────────────────────────────────── */
+    #contacto { padding: 5rem 0; background: var(--blue-900); }
+
+    #contacto .section-label { color: var(--blue-400); }
+    #contacto .section-title { color: var(--white); }
+    #contacto .section-divider { background: var(--blue-400); }
+
+    .contact-grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: rgba(77,158,216,.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon svg { width: 18px; height: 18px; color: var(--blue-400); }
+
+    .contact-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: .15rem;
+    }
+
+    .contact-value {
+      font-size: .9rem;
+      color: rgba(255,255,255,.85);
+    }
+
+    /* Form */
+    .contact-form {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row { display: grid; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+
+    .form-group label {
+      font-size: .8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.7);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 6px;
+      font-size: .9rem;
+      color: var(--white);
+      font-family: var(--font-sans);
+      transition: border-color var(--transition), background var(--transition);
+      outline: none;
+      appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.35); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--blue-400);
+      background: rgba(255,255,255,.12);
+    }
+
+    .form-group select option { background: var(--blue-900); color: var(--white); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-send {
+      background: var(--blue-600);
+      color: var(--white);
+      border: none;
+      padding: .8rem 2rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .btn-send:hover { background: var(--blue-400); }
+    .btn-send:active { transform: scale(.97); }
+
+    .form-notice {
+      font-size: .78rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      background: #07192b;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: .78rem;
+      color: rgba(255,255,255,.35);
+      line-height: 1.6;
+    }
+
+    .footer-text a { color: rgba(255,255,255,.5); }
+    .footer-text a:hover { color: var(--blue-400); }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (min-width: 640px) {
+      .areas-grid { grid-template-columns: 1fr 1fr; }
+      .form-row-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr auto; }
+      .contact-grid { grid-template-columns: 1fr 1.4fr; }
+    }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+      .nav-toggle { display: none; }
+      .areas-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── Scroll animations ───────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-brand">Dr. <span>Perli</span></a>
+        <ul class="nav-links">
+          <li><a href="#formacion">Formación</a></li>
+          <li><a href="#areas">Áreas de interés</a></li>
+          <li><a href="#publicaciones">Publicaciones</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-drawer" id="navDrawer">
+        <a href="#formacion">Formación</a>
+        <a href="#areas">Áreas de interés</a>
+        <a href="#publicaciones">Publicaciones</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero / Presentación ── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">Médico Clínico · Reumatología</div>
+          <h1 class="hero-name">Dr. Perli</h1>
+          <p class="hero-title">Medicina Interna &amp; Residente de Reumatología</p>
+          <p class="hero-bio">
+            Médico clínico con formación en medicina interna, actualmente realizando la residencia de Reumatología.
+            Comprometido con el cuidado integral del paciente, la investigación clínica y el tratamiento de
+            enfermedades autoinmunes y músculo-esqueléticas.
+          </p>
+          <div class="hero-ctas">
+            <a href="#contacto" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              Contactar
+            </a>
+            <a href="#formacion" class="btn btn-outline">
+              Ver formación
+            </a>
+          </div>
+        </div>
+        <div class="hero-avatar">
+          <div class="avatar-ring">
+            <div class="avatar-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Foto de perfil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Formación ── -->
+  <section id="formacion">
+    <div class="container">
+      <div class="fade-up">
+        <span class="section-label">Trayectoria académica</span>
+        <h2 class="section-title">Formación</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="timeline fade-up">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <span class="timeline-year">2024 – actualidad</span>
+          <h3 class="timeline-title">Residencia de Reumatología</h3>
+          <p class="timeline-inst">Hospital de referencia · Ciudad, Argentina</p>
+          <p class="timeline-desc">Formación especializada en diagnóstico y tratamiento de enfermedades autoinmunes, artritis, conectivopatías y patologías músculo-esqueléticas.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <span class="timeline-year">2021 – 2024</span>
+          <h3 class="timeline-title">Residencia de Medicina Interna</h3>
+          <p class="timeline-inst">Hospital General · Ciudad, Argentina</p>
+          <p class="timeline-desc">Rotaciones por clínica médica, guardia general, UTI, cardiología y neurología. Atención de patología compleja y paciente crítico.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <span class="timeline-year">2015 – 2021</span>
+          <h3 class="timeline-title">Médico Cirujano — Título de Grado</h3>
+          <p class="timeline-inst">Universidad Nacional · Facultad de Medicina</p>
+          <p class="timeline-desc">Graduado con diploma de honor. Tesis de grado sobre biomarcadores inflamatorios en artritis temprana.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <span class="timeline-year">2023</span>
+          <h3 class="timeline-title">Curso de Posgrado en Inmunología Clínica</h3>
+          <p class="timeline-inst">Sociedad Argentina de Reumatología</p>
+          <p class="timeline-desc">Formación en mecanismos inmunológicos de las enfermedades autoinmunes y terapias biológicas.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Áreas de interés ── -->
+  <section id="areas">
+    <div class="container">
+      <div class="fade-up">
+        <span class="section-label">Enfoque clínico</span>
+        <h2 class="section-title">Áreas de interés</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="areas-grid fade-up">
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Enfermedades autoinmunes</p>
+            <p class="area-desc">Lupus eritematoso sistémico, síndrome de Sjögren, polimiositis y dermatomiositis.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Artritis inflamatoria</p>
+            <p class="area-desc">Artritis reumatoidea, artritis psoriásica y espondiloartropatías seronegativas.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Terapias biológicas</p>
+            <p class="area-desc">Indicación y seguimiento de tratamientos con anti-TNF, anti-IL6, JAK inhibidores y rituximab.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Vasculitis sistémicas</p>
+            <p class="area-desc">Arteritis de células gigantes, poliarteritis nodosa, granulomatosis con poliangeítis.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 9H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5S16.33 9 15.5 9z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 15H10v-1.5c0-.83-.67-1.5-1.5-1.5S7 12.67 7 13.5 7.67 15 8.5 15z"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Medicina musculoesquelética</p>
+            <p class="area-desc">Osteoporosis, fibromialgia, gota y artropatías microcristalinas. Manejo del dolor crónico.</p>
+          </div>
+        </div>
+
+        <div class="area-card">
+          <div class="area-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <div>
+            <p class="area-name">Investigación clínica</p>
+            <p class="area-desc">Participación en estudios observacionales y ensayos clínicos en reumatología. Epidemiología de enfermedades autoinmunes.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Publicaciones ── -->
+  <section id="publicaciones">
+    <div class="container">
+      <div class="fade-up">
+        <span class="section-label">Producción científica</span>
+        <h2 class="section-title">Publicaciones</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <ul class="pub-list fade-up">
+
+        <li class="pub-item">
+          <p class="pub-type">Artículo original</p>
+          <p class="pub-title">Biomarcadores inflamatorios como predictores de respuesta a terapia biológica en artritis reumatoidea temprana</p>
+          <p class="pub-authors">Perli A., García M., Rodríguez L., et al.</p>
+          <p class="pub-journal">Revista Argentina de Reumatología · 2024; 35(2): 12–21</p>
+          <a href="#" class="pub-link">
+            Ver publicación
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-type">Caso clínico</p>
+          <p class="pub-title">Presentación atípica de lupus eritematoso sistémico con compromiso neuropsiquiátrico predominante: reporte de un caso y revisión de la literatura</p>
+          <p class="pub-authors">Perli A., Fernández C.</p>
+          <p class="pub-journal">Medicina (Buenos Aires) · 2023; 83(4): 445–450</p>
+          <a href="#" class="pub-link">
+            Ver publicación
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-type">Resumen de congreso</p>
+          <p class="pub-title">Prevalencia de síndrome metabólico en pacientes con lupus eritematoso sistémico: análisis de una cohorte argentina</p>
+          <p class="pub-authors">Perli A., López S., Martínez R., et al.</p>
+          <p class="pub-journal">XLVII Congreso Argentino de Reumatología · 2023 · Presentación oral</p>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-type">Revisión</p>
+          <p class="pub-title">Actualización en el manejo de la osteoporosis inducida por glucocorticoides en pacientes con enfermedades inflamatorias crónicas</p>
+          <p class="pub-authors">Perli A., Gómez P.</p>
+          <p class="pub-journal">Actualizaciones en Artritis y Reumatismo · 2022; 14(1): 5–18</p>
+          <a href="#" class="pub-link">
+            Ver publicación
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Contacto ── -->
+  <section id="contacto">
+    <div class="container">
+      <div class="fade-up">
+        <span class="section-label">Comunicación</span>
+        <h2 class="section-title">Contacto</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="contact-grid fade-up">
+
+        <div class="contact-info">
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            </div>
+            <div>
+              <p class="contact-label">Email</p>
+              <p class="contact-value">drperli@mail.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="contact-label">Institución</p>
+              <p class="contact-value">Hospital · Ciudad, Argentina</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <p class="contact-label">LinkedIn</p>
+              <p class="contact-value">linkedin.com/in/drperli</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <p class="contact-label">ORCID / ResearchGate</p>
+              <p class="contact-value">orcid.org/0000-0000-0000-0000</p>
+            </div>
+          </div>
+
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Su nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="su@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="motivo">Motivo de contacto</label>
+            <select id="motivo" name="motivo">
+              <option value="">Seleccionar motivo</option>
+              <option value="colaboracion">Colaboración / investigación</option>
+              <option value="consulta">Consulta profesional</option>
+              <option value="congreso">Congreso / evento</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Escriba su mensaje aquí..." required></textarea>
+          </div>
+
+          <p class="form-notice">Sus datos serán utilizados exclusivamente para responder a su consulta y no serán compartidos con terceros.</p>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-send">
+              Enviar mensaje
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <p class="footer-text">
+        &copy; 2025 Dr. Perli · Médico Clínico y Residente de Reumatología<br>
+        <small>Diseñado para uso informativo. No reemplaza la consulta médica presencial.</small>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll shadow
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Mobile hamburger
+    const toggle = document.getElementById('navToggle');
+    const drawer = document.getElementById('navDrawer');
+    toggle.addEventListener('click', () => {
+      const open = drawer.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+
+    // Close drawer on link click
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        toggle.classList.remove('open');
+      });
+    });
+
+    // Scroll-triggered fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Contact form (placeholder handler)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.btn-send');
+      btn.textContent = 'Mensaje enviado ✓';
+      btn.style.background = '#27ae60';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = 'Enviar mensaje <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+        btn.style.background = '';
+        btn.disabled = false;
+        this.reset();
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
